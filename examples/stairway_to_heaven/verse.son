@@ -1,0 +1,37 @@
+section verse {
+  chords {
+    Am | G | F | G
+    Am | G | Fmaj7 | C
+  }
+
+  bass {
+    A2 G2 F2 G2
+    A2 G2 F2 C2
+  }
+
+  melody {
+    // There's a lady who's sure all that glitters is gold
+    E4 E4 F4 G4
+    A4 G4 F4 E4
+    // And she's buying a stairway to heaven
+    D4 E4 F4 G4
+    A4 A4 G4 F4
+    // When she gets there she knows if the stores are all closed
+    E4 E4 F4 G4
+    A4 B4 C5 B4
+    // With a word she can get what she came for
+    A4 G4 F4 E4
+    D4 C4 D4 E4
+  }
+
+  drums {
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+  }
+}

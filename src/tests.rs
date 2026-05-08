@@ -1,11 +1,71 @@
 use crate::ast::*;
 use crate::lexer::Lexer;
 use crate::parser::Parser;
+use crate::preprocessor::preprocess;
 use crate::transpiler_nrt::transpile_nrt;
+use std::collections::HashSet;
 
 fn parse(src: &str) -> Song {
     let tokens = Lexer::new(src).tokenize().expect("lex failed");
     Parser::new(tokens).parse_song().expect("parse failed")
+}
+
+// ── Preprocessor ─────────────────────────────────────────────────────────────
+
+fn tmp_dir(name: &str) -> std::path::PathBuf {
+    let dir = std::env::temp_dir().join(format!("sonara_test_{}", name));
+    std::fs::create_dir_all(&dir).unwrap();
+    dir
+}
+
+#[test]
+fn preprocessor_passthrough_no_imports() {
+    let src = "tempo 120\nscale C_major\n";
+    let result = preprocess(src, std::path::Path::new("."), &mut HashSet::new()).unwrap();
+    assert!(result.contains("tempo 120"));
+    assert!(result.contains("scale C_major"));
+}
+
+#[test]
+fn preprocessor_expands_import_from_file() {
+    let dir = tmp_dir("expand");
+    std::fs::write(dir.join("extra.son"), "section extra {\n}\n").unwrap();
+
+    let src = "tempo 120\nscale C_major\nimport extra\n";
+    let result = preprocess(src, &dir, &mut HashSet::new()).unwrap();
+    assert!(result.contains("section extra"));
+}
+
+#[test]
+fn preprocessor_error_on_missing_import() {
+    let src = "import nonexistent\n";
+    let result = preprocess(src, std::path::Path::new("."), &mut HashSet::new());
+    assert!(result.is_err());
+    assert!(result.unwrap_err().contains("import not found"));
+}
+
+#[test]
+fn preprocessor_detects_circular_import() {
+    let dir = tmp_dir("circular");
+    std::fs::write(dir.join("a.son"), "import b\n").unwrap();
+    std::fs::write(dir.join("b.son"), "import a\n").unwrap();
+
+    let src = "import a\n";
+    let result = preprocess(src, &dir, &mut HashSet::new());
+    assert!(result.is_err());
+    assert!(result.unwrap_err().contains("circular"));
+}
+
+#[test]
+fn preprocessor_nested_import() {
+    let dir = tmp_dir("nested");
+    std::fs::write(dir.join("drums.son"), "section drums_only {\n  drums {\n    kick snare\n  }\n}\n").unwrap();
+    std::fs::write(dir.join("parts.son"), "import drums\n").unwrap();
+
+    let src = "tempo 120\nscale C_major\nimport parts\n";
+    let result = preprocess(src, &dir, &mut HashSet::new()).unwrap();
+    assert!(result.contains("section drums_only"));
+    assert!(result.contains("kick snare"));
 }
 
 // ── Parser ────────────────────────────────────────────────────────────────────

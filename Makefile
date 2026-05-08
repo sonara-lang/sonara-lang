@@ -10,3 +10,4 @@ test:
 clean:
 	cargo clean
 	rm -f bin/sonara
+	rm -rf .sonara

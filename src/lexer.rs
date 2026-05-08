@@ -10,6 +10,7 @@ pub enum Token {
     Bass,
     Melody,
     Drums,
+    Import,
     // Symbols
     LBrace,
     RBrace,
@@ -122,6 +123,7 @@ impl Lexer {
                     "bass"    => Token::Bass,
                     "melody"  => Token::Melody,
                     "drums"   => Token::Drums,
+                    "import"  => Token::Import,
                     _         => Token::Ident(s),
                 })
             }

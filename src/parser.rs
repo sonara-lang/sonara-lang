@@ -63,6 +63,9 @@ impl Parser {
             if self.peek() == &Token::Eof {
                 break;
             }
+            if self.peek() == &Token::Import {
+                return Err("unresolved import — imports must appear at the top level and are handled before parsing".to_string());
+            }
             sections.push(self.parse_section()?);
             self.skip_newlines();
         }

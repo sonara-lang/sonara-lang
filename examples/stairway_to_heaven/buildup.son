@@ -1,0 +1,37 @@
+section buildup {
+  chords {
+    C | G | Am | F
+    C | G | Am | Am
+  }
+
+  bass {
+    C2 G2 A2 F2
+    C2 G2 A2 A2
+  }
+
+  melody {
+    // And as we wind on down the road
+    C5 B4 A4 G4
+    F4 G4 A4 B4
+    // Our shadows taller than our soul
+    C5 B4 A4 G4
+    F4 E4 D4 C4
+    // There walks a lady we all know
+    E4 F4 G4 A4
+    B4 A4 G4 F4
+    // Who shines white light and wants to show
+    E4 F4 G4 A4
+    G4 F4 E4 A4
+  }
+
+  drums {
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+  }
+}

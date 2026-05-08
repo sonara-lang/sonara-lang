@@ -1,0 +1,35 @@
+section outro {
+  chords {
+    Am | G | F | Am
+    Am | G | F | Am
+  }
+
+  bass {
+    A2 G2 F2 A2
+    A2 G2 F2 A2
+  }
+
+  melody {
+    // And she's buying a stairway to heaven
+    A4 B4 C5 B4
+    A4 G4 F4 E4
+    D4 E4 F4 G4
+    A4 A4 A4 A5
+    // Final descent
+    G5 F5 E5 D5
+    C5 B4 A4 G4
+    F4 E4 D4 C4
+    A3 A3 A3 A3
+  }
+
+  drums {
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+  }
+}

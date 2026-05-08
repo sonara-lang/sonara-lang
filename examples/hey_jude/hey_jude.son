@@ -1,0 +1,9 @@
+// Hey Jude — The Beatles (instrumental)
+// Key: F major, Tempo: 76 bpm
+
+tempo 76
+scale F_major
+
+import verse
+import bridge
+import chorus

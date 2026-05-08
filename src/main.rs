@@ -1,6 +1,7 @@
 mod ast;
 mod lexer;
 mod parser;
+mod preprocessor;
 mod transpiler_nrt;
 mod runner;
 
@@ -59,10 +60,21 @@ fn main() {
         std::process::exit(1);
     });
 
-    let source = fs::read_to_string(&build.input).unwrap_or_else(|e| {
+    let raw = fs::read_to_string(&build.input).unwrap_or_else(|e| {
         eprintln!("Error reading '{}': {}", build.input, e);
         std::process::exit(1);
     });
+
+    let base_dir = Path::new(&build.input)
+        .parent()
+        .unwrap_or(Path::new("."))
+        .to_path_buf();
+
+    let source = preprocessor::preprocess(&raw, &base_dir, &mut std::collections::HashSet::new())
+        .unwrap_or_else(|e| {
+            eprintln!("Import error: {}", e);
+            std::process::exit(1);
+        });
 
     let mut lex = lexer::Lexer::new(&source);
     let tokens = lex.tokenize().unwrap_or_else(|e| {
