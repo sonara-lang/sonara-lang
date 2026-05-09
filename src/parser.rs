@@ -283,6 +283,7 @@ fn parse_note_name(s: &str) -> Result<Note, String> {
             Some('w') => { chars.next(); NoteDuration::Whole }
             Some('h') => { chars.next(); NoteDuration::Half }
             Some('e') => { chars.next(); NoteDuration::Eighth }
+            Some('t') => { chars.next(); NoteDuration::TripletEighth }
             _ => NoteDuration::Quarter,
         };
         return Ok(Note { pitch: 'R', accidental: Accidental::Natural, octave: 0, duration, velocity: None });
@@ -298,11 +299,12 @@ fn parse_note_name(s: &str) -> Result<Note, String> {
         _ => Accidental::Natural,
     };
 
-    // duration suffix before octave: w=whole, h=half, q=quarter (default), e=eighth
+    // duration suffix before octave: w=whole, h=half, q=quarter (default), e=eighth, t=triplet eighth
     let duration = match chars.peek() {
         Some('w') => { chars.next(); NoteDuration::Whole }
         Some('h') => { chars.next(); NoteDuration::Half }
         Some('e') => { chars.next(); NoteDuration::Eighth }
+        Some('t') => { chars.next(); NoteDuration::TripletEighth }
         _ => NoteDuration::Quarter,
     };
 

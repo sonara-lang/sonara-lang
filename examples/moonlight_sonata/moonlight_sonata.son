@@ -3,6 +3,5 @@
 
 tempo 54
 scale Csharp_minor
-transpose -1
 
 import movement1

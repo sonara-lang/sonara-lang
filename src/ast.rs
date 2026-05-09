@@ -53,6 +53,7 @@ pub enum NoteDuration {
     Half,
     Quarter,
     Eighth,
+    TripletEighth,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -119,6 +120,7 @@ impl NoteDuration {
             NoteDuration::Half => 2.0,
             NoteDuration::Quarter => 1.0,
             NoteDuration::Eighth => 0.5,
+            NoteDuration::TripletEighth => 1.0 / 3.0,
         }
     }
 }
@@ -213,9 +215,10 @@ mod tests {
 
     #[test]
     fn duration_beats() {
-        assert_eq!(NoteDuration::Whole.beats(),   4.0);
-        assert_eq!(NoteDuration::Half.beats(),    2.0);
-        assert_eq!(NoteDuration::Quarter.beats(), 1.0);
-        assert_eq!(NoteDuration::Eighth.beats(),  0.5);
+        assert_eq!(NoteDuration::Whole.beats(),         4.0);
+        assert_eq!(NoteDuration::Half.beats(),          2.0);
+        assert_eq!(NoteDuration::Quarter.beats(),       1.0);
+        assert_eq!(NoteDuration::Eighth.beats(),        0.5);
+        assert!((NoteDuration::TripletEighth.beats() - 1.0 / 3.0).abs() < 1e-6);
     }
 }

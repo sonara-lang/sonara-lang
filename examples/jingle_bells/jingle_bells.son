@@ -1,0 +1,113 @@
+// Jingle Bells — James Lord Pierpont (1857, public domain)
+// Key: C major | 4/4 | 120 BPM
+
+tempo 120
+scale C_major
+
+section verse {
+  chords {
+    C | C | C | G
+    C | C | F | G
+  }
+
+  bass {
+    Cw2 Cw2 Cw2 Gw2
+    Cw2 Cw2 Fw2 Gw2
+  }
+
+  melody {
+    // "Dashing through the snow"
+    E4 E4 Eh4
+    // "In a one-horse open sleigh"
+    E4 G4 C4 D4
+    // "O'er the fields we go"
+    E4 D4 C4 D4
+    // "Laughing all the way"
+    G4 G4 Gh4
+    // "Bells on bobtail ring"
+    E4 E4 Eh4
+    // "Making spirits bright"
+    G4 G4 Gh4
+    // "What fun it is to"
+    A4 G4 F4 E4
+    // "Laugh and sing a sleighing song tonight"
+    Dh4 Gh3
+  }
+
+  drums {
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+  }
+}
+
+section chorus {
+  chords {
+    C | C | C | G
+    F | C | G | C
+  }
+
+  bass {
+    Cw2 Cw2 Cw2 Gw2
+    Fw2 Cw2 Gw2 Cw2
+  }
+
+  melody {
+    // "Jingle bells"
+    E4 E4 Eh4
+    // "Jingle bells"
+    E4 E4 Eh4
+    // "Jingle all the way"
+    E4 G4 C4 D4
+    // "Oh [what fun...]"
+    Eh4 Rh
+    // "Oh what fun it is to ride"
+    F4 F4 F4 F4
+    // "In a one-horse open sleigh"
+    F4 E4 E4 E4
+    // "Oh what fun it is to ride"
+    G4 G4 F4 D4
+    // "Sleigh"
+    Ch4 Rh
+  }
+
+  drums {
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+    kick hihat snare hihat
+  }
+}
+
+section outro {
+  chords {
+    C | F | G7 | C
+  }
+
+  bass {
+    Cw2 Fw2 Gw2 Cw2
+  }
+
+  melody {
+    Eh4 Gh4
+    Ah4 Fh4
+    Dh4 Bh4
+    Cw4
+  }
+
+  drums {
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+    kick snare kick snare
+  }
+}

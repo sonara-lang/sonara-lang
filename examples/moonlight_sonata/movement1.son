@@ -1,26 +1,220 @@
-section movement1 {
+// Moonlight Sonata Op. 27 No. 2 — Mvt. 1 (Adagio sostenuto)
+// Beethoven | C# minor | 54 BPM | 4/4
+// 69 bars — triplet eighth arpeggios (12 per bar = 4 beats)
+// Chord arpeggios: C#m=G#3-C#4-E4  F#m=F#3-A3-C#4  G#=G#3-B#3-D#4  A=A3-C#4-E4  E=E3-G#3-B3
+
+section opening {
   chords {
-    C#m | C#m | G#m | G#m
-    C#m | F#m | G# | C#m
+    // Bars 1-5: tonic C# minor
+    C#m | C#m | C#m | C#m | C#m
+    // Bars 6-9: iv — V — i — i
+    F#m | G# | C#m | C#m
+    // Bars 10-14: opening repeat
+    C#m | C#m | C#m | C#m | C#m
+    // Bars 15-18: iv — V — i — i
+    F#m | G# | C#m | C#m
+    // Bars 19-23: VI — III — iv — V — i
+    A | E | F#m | G# | C#m
   }
 
   bass {
-    C#w2 C#w2 G#w2 G#w2
-    C#w2 F#w2 G#w2 C#w2
+    C#w2 C#w2 C#w2 C#w2 C#w2
+    F#w2 G#w2 C#w2 C#w2
+    C#w2 C#w2 C#w2 C#w2 C#w2
+    F#w2 G#w2 C#w2 C#w2
+    Aw2 Ew2 F#w2 G#w2 C#w2
   }
 
   melody {
-    // Bars 1-2: C#m arpeggios (eighth notes)
-    G#e3 C#e4 Ee4 G#e3 C#e4 Ee4 G#e3 C#e4
-    G#e3 C#e4 Ee4 G#e3 C#e4 Ee4 G#e3 C#e4
-    // Bars 3-4: G#m arpeggios
-    G#e3 Be3 D#e4 G#e3 Be3 D#e4 G#e3 Be3
-    D#e4 G#e3 Be3 D#e4 G#e3 Be3 D#e4 G#e3
-    // Bars 5-6: descending melody theme
-    Ee4 D#e4 C#e4 Be3 Ae3 G#e3 F#e3 Ee3
-    F#e3 G#e3 Ae3 Be3 C#e4 D#e4 Ee4 F#e4
-    // Bars 7-8: resolution
-    G#e4 F#e4 Ee4 D#e4 C#e4 Be3 Ae3 G#e3
-    C#e3 Ee3 G#e3 C#e3 Ee3 G#e3 C#e3 G#e3
+    // Bar 1
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 2
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 3
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 4
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 5
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 6 (F#m)
+    F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4
+    // Bar 7 (G# dominant)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 8
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 9
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 10
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 11
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 12
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 13
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 14
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 15 (F#m)
+    F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4
+    // Bar 16 (G# dominant)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 17
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 18
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 19 (A major — VI)
+    At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4
+    // Bar 20 (E major — III)
+    Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3
+    // Bar 21 (F#m)
+    F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4
+    // Bar 22 (G# dominant)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 23 (C#m cadence)
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+  }
+}
+
+section development {
+  chords {
+    // Bars 24-27: C#m
+    C#m | C#m | C#m | C#m
+    // Bars 28-31: A major (VI) — harmonic brightening
+    A | A | A | A
+    // Bars 32-35: E major (III)
+    E | E | E | E
+    // Bars 36-42: G# dominant — extended tension
+    G# | G# | G# | G# | G# | G# | G#
+  }
+
+  bass {
+    C#w2 C#w2 C#w2 C#w2
+    Aw2 Aw2 Aw2 Aw2
+    Ew2 Ew2 Ew2 Ew2
+    G#w2 G#w2 G#w2 G#w2 G#w2 G#w2 G#w2
+  }
+
+  melody {
+    // Bar 24
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 25
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 26
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 27
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 28 (A)
+    At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4
+    // Bar 29 (A)
+    At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4
+    // Bar 30 (A)
+    At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4
+    // Bar 31 (A)
+    At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4
+    // Bar 32 (E)
+    Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3
+    // Bar 33 (E)
+    Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3
+    // Bar 34 (E)
+    Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3
+    // Bar 35 (E)
+    Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3
+    // Bar 36 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 37 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 38 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 39 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 40 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 41 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 42 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+  }
+}
+
+section recapitulation {
+  chords {
+    // Bars 43-47: return to tonic
+    C#m | C#m | C#m | C#m | C#m
+    // Bars 48-51: iv — V — i — i
+    F#m | G# | C#m | C#m
+    // Bars 52-56: C#m
+    C#m | C#m | C#m | C#m | C#m
+    // Bars 57-60: iv — V — i — i
+    F#m | G# | C#m | C#m
+    // Bars 61-65: VI — III — iv — V — i
+    A | E | F#m | G# | C#m
+    // Bars 66-69: final cadence
+    G# | G# | G# | C#m
+  }
+
+  bass {
+    C#w2 C#w2 C#w2 C#w2 C#w2
+    F#w2 G#w2 C#w2 C#w2
+    C#w2 C#w2 C#w2 C#w2 C#w2
+    F#w2 G#w2 C#w2 C#w2
+    Aw2 Ew2 F#w2 G#w2 C#w2
+    G#w2 G#w2 G#w2 C#w2
+  }
+
+  melody {
+    // Bar 43
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 44
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 45
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 46
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 47
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 48 (F#m)
+    F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4
+    // Bar 49 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 50
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 51
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 52
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 53
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 54
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 55
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 56
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 57 (F#m)
+    F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4
+    // Bar 58 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 59
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 60
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 61 (A)
+    At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4 At3 C#t4 Et4
+    // Bar 62 (E)
+    Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3 Et3 G#t3 Bt3
+    // Bar 63 (F#m)
+    F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4 F#t3 At3 C#t4
+    // Bar 64 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 65
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
+    // Bar 66 (G# — final approach)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 67 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 68 (G#)
+    G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4 G#t3 B#t3 D#t4
+    // Bar 69 (C#m — final)
+    G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4 G#t3 C#t4 Et4
   }
 }

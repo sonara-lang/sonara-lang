@@ -233,14 +233,14 @@ fn print_help() {
     println!("    drums   {{ kick hihat snare hihat }}");
     println!("  }}");
     println!();
-    println!("  Note format:  <pitch>[#|b][w|h|e]<octave>[:<velocity>]");
+    println!("  Note format:  <pitch>[#|b][w|h|e|t]<octave>[:<velocity>]");
     println!("    C4          quarter note, octave 4");
     println!("    G#e3        G# eighth note, octave 3");
     println!("    Bbw2        Bb whole note, octave 2");
     println!("    A4:64       quarter note with velocity 64 (0-127)");
     println!("    R / Re      rest (quarter / eighth)");
     println!();
-    println!("  Durations:  w=whole  h=half  (default)=quarter  e=eighth");
+    println!("  Durations:  w=whole  h=half  (default)=quarter  e=eighth  t=triplet-eighth");
     println!("  Drums:      kick  snare  hihat  rest");
 }
 
