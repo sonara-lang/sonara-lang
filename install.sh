@@ -12,6 +12,22 @@ echo ""
 echo -e "${CYAN}Sonara installer${NC}"
 echo "────────────────────────────────────────"
 
+# ── clone / update repo ───────────────────────────────────────────────────────
+REPO_URL="https://github.com/sonara-lang/sonara-lang.git"
+REPO_DIR="$HOME/.sonara"
+
+command -v git &>/dev/null || die "git not found. Install git and re-run."
+
+if [ -d "$REPO_DIR/.git" ]; then
+  info "Updating Sonara repository..."
+  git -C "$REPO_DIR" pull --quiet
+  ok "Repository updated"
+else
+  info "Cloning Sonara repository..."
+  git clone --quiet "$REPO_URL" "$REPO_DIR"
+  ok "Repository cloned"
+fi
+
 # ── detect OS ─────────────────────────────────────────────────────────────────
 OS="$(uname -s)"
 case "$OS" in
@@ -28,8 +44,7 @@ esac
 info "Detected: $OS / ${DISTRO:-unknown}"
 
 # ── check prebuilt binary ─────────────────────────────────────────────────────
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BINARY="$SCRIPT_DIR/bin/sonara"
+BINARY="$REPO_DIR/bin/sonara"
 
 [ -f "$BINARY" ] || die "Sonara binary not found. Please download a release package."
 ok "Sonara binary found"

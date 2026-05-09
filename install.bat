@@ -7,6 +7,27 @@ echo  Sonara installer (Windows)
 echo  ────────────────────────────────────────
 echo.
 
+:: ── clone / update repo ────────────────────────────────────────────────────────
+set "REPO_URL=https://github.com/sonara-lang/sonara-lang.git"
+set "REPO_DIR=%USERPROFILE%\.sonara"
+
+where git >nul 2>&1
+if %errorlevel% neq 0 (
+    echo  [X] git not found. Install Git for Windows from https://git-scm.com and re-run.
+    pause
+    exit /b 1
+)
+
+if exist "!REPO_DIR!\.git" (
+    echo  [->] Updating Sonara repository...
+    git -C "!REPO_DIR!" pull --quiet
+    echo  [OK] Repository updated
+) else (
+    echo  [->] Cloning Sonara repository...
+    git clone --quiet "!REPO_URL!" "!REPO_DIR!"
+    echo  [OK] Repository cloned
+)
+
 :: ── check for admin ───────────────────────────────────────────────────────────
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -17,8 +38,7 @@ if %errorlevel% neq 0 (
 )
 
 :: ── check prebuilt binary ─────────────────────────────────────────────────────
-set "SCRIPT_DIR=%~dp0"
-set "BINARY=%SCRIPT_DIR%bin\sonara.exe"
+set "BINARY=!REPO_DIR!\bin\sonara.exe"
 
 if not exist "!BINARY!" (
     echo  [X] Sonara binary not found. Please download a release package.
