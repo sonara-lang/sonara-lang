@@ -1,4 +1,4 @@
-# Sonara
+# 🎵 Sonara
 
 A music composition language that compiles to audio.
 
@@ -42,11 +42,11 @@ sonara build <file.son> [--to=mp3|wav]
 **Example:**
 
 ```bash
-sonara build examples/christmas.son
-# → output/christmas.mp3
+sonara build examples/jingle_bells/jingle_bells.son
+# → output/jingle_bells.mp3
 
-sonara build examples/christmas.son --to=wav
-# → output/christmas.wav
+sonara build examples/jingle_bells/jingle_bells.son --to=wav
+# → output/jingle_bells.wav
 ```
 
 ---
@@ -139,7 +139,7 @@ Sections play sequentially. Within a section, all tracks (`chords`, `bass`, `mel
 
 ## Example — Jingle Bells
 
-`examples/christmas.son`:
+`examples/jingle_bells/jingle_bells.son`:
 
 ```son
 tempo 120
@@ -171,8 +171,8 @@ section verse {
 ```
 
 ```bash
-sonara build examples/christmas.son
-# → output/christmas.mp3
+sonara build examples/jingle_bells/jingle_bells.son
+# → output/jingle_bells.mp3
 ```
 
 ---
@@ -190,7 +190,7 @@ src/
   main.rs           CLI
 
 examples/
-  christmas.son     Jingle Bells
+  jingle_bells/     Jingle Bells
 
 bin/
   sonara            Pre-compiled binary (Linux/macOS)
@@ -225,4 +225,4 @@ cp target/release/sonara bin/sonara
 
 ## License
 
-MIT
+Apache 2.0
