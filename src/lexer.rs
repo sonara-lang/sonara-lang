@@ -11,8 +11,10 @@ pub enum Token {
     Melody,
     Drums,
     Import,
+    Transpose,
     // Symbols
     LBrace,
+    Minus,
     RBrace,
     Pipe,
     // Values
@@ -99,6 +101,7 @@ impl Lexer {
             Some('{') => { self.advance(); Ok(Token::LBrace) }
             Some('}') => { self.advance(); Ok(Token::RBrace) }
             Some('|') => { self.advance(); Ok(Token::Pipe) }
+            Some('-') => { self.advance(); Ok(Token::Minus) }
             Some(ch) if ch.is_ascii_digit() => {
                 let mut s = String::new();
                 while let Some(d) = self.peek() {
@@ -109,7 +112,7 @@ impl Lexer {
             Some(ch) if ch.is_alphabetic() || ch == '_' => {
                 let mut s = String::new();
                 while let Some(c) = self.peek() {
-                    if c.is_alphanumeric() || c == '_' || c == '#' {
+                    if c.is_alphanumeric() || c == '_' || c == '#' || c == ':' {
                         s.push(c); self.advance();
                     } else {
                         break;
@@ -123,8 +126,9 @@ impl Lexer {
                     "bass"    => Token::Bass,
                     "melody"  => Token::Melody,
                     "drums"   => Token::Drums,
-                    "import"  => Token::Import,
-                    _         => Token::Ident(s),
+                    "import"    => Token::Import,
+                    "transpose" => Token::Transpose,
+                    _           => Token::Ident(s),
                 })
             }
             Some(ch) => Err(format!("unexpected char: {:?}", ch)),

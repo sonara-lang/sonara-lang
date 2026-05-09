@@ -17,7 +17,7 @@ pub fn transpile_nrt(song: &Song, output_wav_path: &str) -> String {
 
     let mut section_offset = 0.0f32;
     for section in &song.sections {
-        collect_section(&mut events, section, section_offset, beat_dur, &mut node_id);
+        collect_section(&mut events, section, section_offset, beat_dur, &mut node_id, song.transpose);
         section_offset += section_duration(section, beat_dur);
     }
 
@@ -37,22 +37,33 @@ pub fn transpile_nrt(song: &Song, output_wav_path: &str) -> String {
 
 fn synthdef_events() -> Vec<String> {
     vec![
-        "[ '/d_recv', SynthDef(\\sonaraChord, { |out=0, freq=440, amp=0.12, dur=2.0|\n\
-         \tvar sig = Mix.ar(Saw.ar(freq * [1, 2, 3], amp / 3));\n\
-         \tvar env = EnvGen.kr(Env.linen(0.02, dur - 0.1, 0.08), doneAction: 2);\n\
-         \tOut.ar(out, (sig * env).dup);\n\
+        // Additive sine harmonics — piano-like chord, no harsh saw waves
+        "[ '/d_recv', SynthDef(\\sonaraChord, { |out=0, freq=440, amp=0.08, dur=2.0|\n\
+         \tvar sig = SinOsc.ar(freq,       0, 1.00)\n\
+         \t        + SinOsc.ar(freq * 2,   0, 0.40)\n\
+         \t        + SinOsc.ar(freq * 3,   0, 0.20)\n\
+         \t        + SinOsc.ar(freq * 4,   0, 0.08);\n\
+         \tvar env = EnvGen.kr(Env([0, 1, 0.7, 0.4, 0], [0.005, 0.04, dur * 0.4, dur * 0.55]), doneAction: 2);\n\
+         \tOut.ar(out, (sig * env * amp).dup);\n\
          }).asBytes ]".to_string(),
 
-        "[ '/d_recv', SynthDef(\\sonaraMelody, { |out=0, freq=440, amp=0.4, dur=0.5|\n\
-         \tvar sig = SinOsc.ar(freq, 0, amp) + Pulse.ar(freq, 0.3, amp * 0.2);\n\
-         \tvar env = EnvGen.kr(Env.perc(0.01, dur * 0.85), doneAction: 2);\n\
-         \tOut.ar(out, (sig * env).dup);\n\
+        // Piano melody: bright percussive attack, long decay
+        "[ '/d_recv', SynthDef(\\sonaraMelody, { |out=0, freq=440, amp=0.30, dur=0.5|\n\
+         \tvar sig = SinOsc.ar(freq,       0, 1.00)\n\
+         \t        + SinOsc.ar(freq * 2,   0, 0.50)\n\
+         \t        + SinOsc.ar(freq * 3,   0, 0.25)\n\
+         \t        + SinOsc.ar(freq * 4,   0, 0.10);\n\
+         \tvar env = EnvGen.kr(Env([0, 1, 0.5, 0], [0.006, dur * 0.15, dur * 0.80]), doneAction: 2);\n\
+         \tOut.ar(out, (sig * env * amp).dup);\n\
          }).asBytes ]".to_string(),
 
-        "[ '/d_recv', SynthDef(\\sonaraBass, { |out=0, freq=110, amp=0.35, dur=1.0|\n\
-         \tvar sig = SinOsc.ar(freq, 0, amp) + SinOsc.ar(freq * 2, 0, amp * 0.3);\n\
-         \tvar env = EnvGen.kr(Env.perc(0.01, dur * 0.9), doneAction: 2);\n\
-         \tOut.ar(out, (sig * env).dup);\n\
+        // Warm bass: fundamental + soft second harmonic
+        "[ '/d_recv', SynthDef(\\sonaraBass, { |out=0, freq=110, amp=0.25, dur=1.0|\n\
+         \tvar sig = SinOsc.ar(freq,       0, 1.00)\n\
+         \t        + SinOsc.ar(freq * 2,   0, 0.30)\n\
+         \t        + SinOsc.ar(freq * 3,   0, 0.10);\n\
+         \tvar env = EnvGen.kr(Env([0, 1, 0.6, 0], [0.008, dur * 0.20, dur * 0.75]), doneAction: 2);\n\
+         \tOut.ar(out, (sig * env * amp).dup);\n\
          }).asBytes ]".to_string(),
 
         "[ '/d_recv', SynthDef(\\sonaraKick, { |out=0, amp=0.8|\n\
@@ -82,17 +93,18 @@ fn collect_section(
     offset: f32,
     beat_dur: f32,
     node_id: &mut u32,
+    transpose: i8,
 ) {
     // Chords
     let mut t = offset;
     for chord in &section.chords {
         let dur = beat_dur * 4.0;
         for midi in chord.to_midi_notes() {
-            let freq = midi_to_freq(midi);
+            let freq = midi_to_freq(midi as i16 + transpose as i16);
             events.push(Event {
                 time: t,
                 msg: format!(
-                    "[ '/s_new', 'sonaraChord', {}, 0, 0, 'freq', {:.2}, 'amp', 0.12, 'dur', {:.3} ]",
+                    "[ '/s_new', 'sonaraChord', {}, 0, 0, 'freq', {:.2}, 'amp', 0.08, 'dur', {:.3} ]",
                     node_id, freq, dur
                 ),
             });
@@ -105,15 +117,18 @@ fn collect_section(
     let mut t = offset;
     for note in &section.bass {
         let dur = beat_dur * note.duration.beats();
-        let freq = midi_to_freq(note.to_midi());
-        events.push(Event {
-            time: t,
-            msg: format!(
-                "[ '/s_new', 'sonaraBass', {}, 0, 0, 'freq', {:.2}, 'amp', 0.35, 'dur', {:.3} ]",
-                node_id, freq, dur
-            ),
-        });
-        *node_id += 1;
+        if note.pitch != 'R' {
+            let freq = midi_to_freq(note.to_midi() as i16 + transpose as i16);
+            let amp = note.velocity.map(|v| v as f32 / 127.0).unwrap_or(0.25);
+            events.push(Event {
+                time: t,
+                msg: format!(
+                    "[ '/s_new', 'sonaraBass', {}, 0, 0, 'freq', {:.2}, 'amp', {:.3}, 'dur', {:.3} ]",
+                    node_id, freq, amp, dur
+                ),
+            });
+            *node_id += 1;
+        }
         t += dur;
     }
 
@@ -121,15 +136,18 @@ fn collect_section(
     let mut t = offset;
     for note in &section.melody {
         let dur = beat_dur * note.duration.beats();
-        let freq = midi_to_freq(note.to_midi());
-        events.push(Event {
-            time: t,
-            msg: format!(
-                "[ '/s_new', 'sonaraMelody', {}, 0, 0, 'freq', {:.2}, 'amp', 0.4, 'dur', {:.3} ]",
-                node_id, freq, dur
-            ),
-        });
-        *node_id += 1;
+        if note.pitch != 'R' {
+            let freq = midi_to_freq(note.to_midi() as i16 + transpose as i16);
+            let amp = note.velocity.map(|v| v as f32 / 127.0).unwrap_or(0.30);
+            events.push(Event {
+                time: t,
+                msg: format!(
+                    "[ '/s_new', 'sonaraMelody', {}, 0, 0, 'freq', {:.2}, 'amp', {:.3}, 'dur', {:.3} ]",
+                    node_id, freq, amp, dur
+                ),
+            });
+            *node_id += 1;
+        }
         t += dur;
     }
 
@@ -193,6 +211,6 @@ fn section_duration(section: &Section, beat_dur: f32) -> f32 {
     chord_dur.max(melody_dur).max(bass_dur).max(drum_dur)
 }
 
-fn midi_to_freq(midi: u8) -> f32 {
+fn midi_to_freq(midi: i16) -> f32 {
     440.0 * 2.0_f32.powf((midi as f32 - 69.0) / 12.0)
 }

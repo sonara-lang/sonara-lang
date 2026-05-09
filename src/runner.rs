@@ -1,5 +1,18 @@
 use std::process::Command;
 
+pub fn play_wav(wav_path: &str) -> Result<(), String> {
+    eprintln!("Playing...");
+    let status = Command::new("ffplay")
+        .args(["-nodisp", "-autoexit", wav_path])
+        .status()
+        .map_err(|e| format!("ffplay not found — run install.sh to set up dependencies: {}", e))?;
+
+    if !status.success() {
+        return Err(format!("playback failed with code: {}", status));
+    }
+    Ok(())
+}
+
 pub fn run_sclang(scd_path: &str) -> Result<(), String> {
     eprintln!("Rendering audio...");
     let status = Command::new("sclang")

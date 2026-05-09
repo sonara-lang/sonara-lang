@@ -1,0 +1,26 @@
+section movement1 {
+  chords {
+    C#m | C#m | G#m | G#m
+    C#m | F#m | G# | C#m
+  }
+
+  bass {
+    C#w2 C#w2 G#w2 G#w2
+    C#w2 F#w2 G#w2 C#w2
+  }
+
+  melody {
+    // Bars 1-2: C#m arpeggios (eighth notes)
+    G#e3 C#e4 Ee4 G#e3 C#e4 Ee4 G#e3 C#e4
+    G#e3 C#e4 Ee4 G#e3 C#e4 Ee4 G#e3 C#e4
+    // Bars 3-4: G#m arpeggios
+    G#e3 Be3 D#e4 G#e3 Be3 D#e4 G#e3 Be3
+    D#e4 G#e3 Be3 D#e4 G#e3 Be3 D#e4 G#e3
+    // Bars 5-6: descending melody theme
+    Ee4 D#e4 C#e4 Be3 Ae3 G#e3 F#e3 Ee3
+    F#e3 G#e3 Ae3 Be3 C#e4 D#e4 Ee4 F#e4
+    // Bars 7-8: resolution
+    G#e4 F#e4 Ee4 D#e4 C#e4 Be3 Ae3 G#e3
+    C#e3 Ee3 G#e3 C#e3 Ee3 G#e3 C#e3 G#e3
+  }
+}

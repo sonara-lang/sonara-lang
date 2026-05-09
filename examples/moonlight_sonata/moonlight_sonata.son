@@ -1,0 +1,8 @@
+// Moonlight Sonata — Ludwig van Beethoven (Op. 27, No. 2)
+// Key: C# minor, Tempo: 54 bpm (Adagio sostenuto)
+
+tempo 54
+scale Csharp_minor
+transpose -1
+
+import movement1

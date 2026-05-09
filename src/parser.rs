@@ -57,6 +57,12 @@ impl Parser {
         let scale = self.parse_scale()?;
         self.skip_newlines();
 
+        let transpose = if self.peek() == &Token::Transpose {
+            self.parse_transpose()?
+        } else {
+            0
+        };
+
         let mut sections = Vec::new();
         while self.peek() != &Token::Eof {
             self.skip_newlines();
@@ -70,7 +76,20 @@ impl Parser {
             self.skip_newlines();
         }
 
-        Ok(Song { tempo, scale, sections })
+        Ok(Song { tempo, scale, transpose, sections })
+    }
+
+    fn parse_transpose(&mut self) -> Result<i8, String> {
+        self.expect(&Token::Transpose)?;
+        let negative = if self.peek() == &Token::Minus {
+            self.advance();
+            true
+        } else {
+            false
+        };
+        let n = self.expect_number()? as i8;
+        self.skip_newlines();
+        Ok(if negative { -n } else { n })
     }
 
     fn parse_tempo(&mut self) -> Result<u32, String> {
@@ -258,6 +277,17 @@ fn parse_note_name(s: &str) -> Result<Note, String> {
     let mut chars = s.chars().peekable();
 
     let pitch = chars.next().ok_or("empty note")?;
+
+    if pitch == 'R' {
+        let duration = match chars.peek() {
+            Some('w') => { chars.next(); NoteDuration::Whole }
+            Some('h') => { chars.next(); NoteDuration::Half }
+            Some('e') => { chars.next(); NoteDuration::Eighth }
+            _ => NoteDuration::Quarter,
+        };
+        return Ok(Note { pitch: 'R', accidental: Accidental::Natural, octave: 0, duration, velocity: None });
+    }
+
     if !matches!(pitch, 'A'..='G') {
         return Err(format!("invalid note pitch: {}", pitch));
     }
@@ -276,8 +306,15 @@ fn parse_note_name(s: &str) -> Result<Note, String> {
         _ => NoteDuration::Quarter,
     };
 
-    let octave_str: String = chars.collect();
+    let remaining: String = chars.collect();
+    let (octave_str, velocity) = if let Some(pos) = remaining.find(':') {
+        let vel: u8 = remaining[pos + 1..].parse()
+            .map_err(|_| format!("invalid velocity in note: {}", s))?;
+        (&remaining[..pos], Some(vel))
+    } else {
+        (remaining.as_str(), None)
+    };
     let octave: u8 = octave_str.parse().map_err(|_| format!("invalid octave in note: {}", s))?;
 
-    Ok(Note { pitch, accidental, octave, duration })
+    Ok(Note { pitch, accidental, octave, duration, velocity })
 }

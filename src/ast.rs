@@ -2,6 +2,7 @@
 pub struct Song {
     pub tempo: u32,
     pub scale: String,
+    pub transpose: i8,
     pub sections: Vec<Section>,
 }
 
@@ -43,6 +44,7 @@ pub struct Note {
     pub accidental: Accidental,
     pub octave: u8,
     pub duration: NoteDuration,
+    pub velocity: Option<u8>,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -126,7 +128,7 @@ mod tests {
     use super::*;
 
     fn note(pitch: char, octave: u8) -> Note {
-        Note { pitch, accidental: Accidental::Natural, octave, duration: NoteDuration::Quarter }
+        Note { pitch, accidental: Accidental::Natural, octave, duration: NoteDuration::Quarter, velocity: None }
     }
 
     fn chord(root: char, quality: ChordQuality) -> Chord {
@@ -152,13 +154,13 @@ mod tests {
 
     #[test]
     fn midi_sharp_raises_by_one() {
-        let n = Note { pitch: 'C', accidental: Accidental::Sharp, octave: 4, duration: NoteDuration::Quarter };
+        let n = Note { pitch: 'C', accidental: Accidental::Sharp, octave: 4, duration: NoteDuration::Quarter, velocity: None };
         assert_eq!(n.to_midi(), 61);
     }
 
     #[test]
     fn midi_flat_lowers_by_one() {
-        let n = Note { pitch: 'B', accidental: Accidental::Flat, octave: 4, duration: NoteDuration::Quarter };
+        let n = Note { pitch: 'B', accidental: Accidental::Flat, octave: 4, duration: NoteDuration::Quarter, velocity: None };
         assert_eq!(n.to_midi(), 70);
     }
 
