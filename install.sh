@@ -12,21 +12,18 @@ echo ""
 echo -e "${CYAN}Sonara installer${NC}"
 echo "────────────────────────────────────────"
 
-# ── clone / update repo ───────────────────────────────────────────────────────
-REPO_URL="https://github.com/sonara-lang/sonara-lang.git"
-REPO_DIR="$HOME/.sonara"
+# ── download binary ──────────────────────────────────────────────────────────
+BINARY_URL="https://github.com/sonara-lang/sonara-lang/raw/refs/heads/main/bin/sonara"
+BINARY_DIR="$HOME/.sonara/bin"
+BINARY="$BINARY_DIR/sonara"
 
-command -v git &>/dev/null || die "git not found. Install git and re-run."
+command -v curl &>/dev/null || die "curl not found. Install curl and re-run."
 
-if [ -d "$REPO_DIR/.git" ]; then
-  info "Updating Sonara repository..."
-  git -C "$REPO_DIR" pull --quiet
-  ok "Repository updated"
-else
-  info "Cloning Sonara repository..."
-  git clone --quiet "$REPO_URL" "$REPO_DIR"
-  ok "Repository cloned"
-fi
+mkdir -p "$BINARY_DIR"
+info "Downloading Sonara binary..."
+curl -fsSL "$BINARY_URL" -o "$BINARY"
+chmod +x "$BINARY"
+ok "Binary downloaded"
 
 # ── detect OS ─────────────────────────────────────────────────────────────────
 OS="$(uname -s)"
@@ -43,11 +40,6 @@ esac
 
 info "Detected: $OS / ${DISTRO:-unknown}"
 
-# ── check prebuilt binary ─────────────────────────────────────────────────────
-BINARY="$REPO_DIR/bin/sonara"
-
-[ -f "$BINARY" ] || die "Sonara binary not found. Please download a release package."
-ok "Sonara binary found"
 
 # ── install audio engine ──────────────────────────────────────────────────────
 install_apt() {
